@@ -43,7 +43,7 @@ Here are some ideas to get you started:
 - Log in using your Minecraft server stats
 - Build in a vulnerability and show how to hack it to log in
 - Log in by clicking the right cat gif
-- Authly via AI that decides if you're you based on your writing tone  
+- Authentication via AI that decides if you're you based on your writing tone  
 
 Remember: The more original and creative your project is, the better! These are just starting points - feel free to come up with your own unique ideas!
 
