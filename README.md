@@ -61,6 +61,7 @@ Simple static website with:
 - css
 - tailwindCSS
 - js (scrolling & particles)
+- svelte (unused tutorial)
 
 ## Contributors
 <details>
