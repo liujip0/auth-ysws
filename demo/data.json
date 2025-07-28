@@ -1,0 +1,18 @@
+{
+  "users": {
+    "jim": {
+      "secret_key": 2,
+      "habits": {},
+      "streak": 0
+    },
+    "alex": {
+      "secret_key": 7,
+      "habits": {
+        "exercise": {
+          "done_today": true
+        }
+      },
+      "streak": 1
+    }
+  }
+}

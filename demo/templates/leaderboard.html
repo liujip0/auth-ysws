@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leaderboard - MathKeyHabits</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Leaderboard</h1>
+        
+        {% if users %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Username</th>
+                    <th>Streak</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.streak }} days</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No users yet. Be the first to sign up!</p>
+        {% endif %}
+        
+        <div class="links">
+            <a href="/dashboard">Back to Dashboard</a>
+            <a href="/">Home</a>
+        </div>
+    </div>
+</body>
+</html> 
