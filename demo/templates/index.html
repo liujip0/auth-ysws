@@ -1,45 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Authly Project Demo</title>
-    <link rel="stylesheet" href="/static/style.css">
+	<title>Authly Project Demo</title>
+	<link href="/static/style.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container landing">
-        <h1>Authly Project Demo</h1>
-        <p>A habit tracker with a weird authentication system</p>
-        
-        <div class="features">
-            <h3>How It Works</h3>
-            <ul>
-                <li>Sign up with a username and a secret number</li>
-                <li>To login, solve a math puzzle using your secret number</li>
-                <li>Track daily habits and build streaks</li>
-                <li>Compete on the leaderboard</li>
-            </ul>
-        </div>
+<div class="container landing">
+	<h1>Authly Project Demo</h1>
+	<p>A habit tracker with a weird authentication system</p>
 
-        <div class="features">
-            <h3>The Weird Auth Concept</h3>
-            <p>Instead of passwords, you choose a secret number. When you login, the system generates a math puzzle using your number as "x". You solve the equation and enter the result. For example, if your secret number is 4, you might get:</p>
-            <div class="puzzle">
-                <b>x × 3 = ?</b><br>
-                You solve: 4 × 3 = 12<br>
-                You enter: 12
-            </div>
-            <p>Or you might get:</p>
-            <div class="puzzle">
-                <b>(x × 2) + 5 = ?</b><br>
-                You solve: (4 × 2) + 5 = 8 + 5 = 13<br>
-                You enter: 13
-            </div>
-            <p>This way, you never type your secret number directly. You solve for the result instead! The puzzle changes each time you login.</p>
-        </div>
+	<div class="features">
+		<h3>How It Works</h3>
+		<ul>
+			<li>Sign up with a username and a secret number</li>
+			<li>To login, solve a math puzzle using your secret number</li>
+			<li>Track daily habits and build streaks</li>
+			<li>Compete on the leaderboard</li>
+		</ul>
+	</div>
 
-        <div class="links">
-            <a href="/signup">Sign up</a>
-            <a href="/login">Login</a>
-        </div>
-    </div>
+	<div class="features">
+		<h3>The Weird Auth Concept</h3>
+		<p>Instead of passwords, you choose a secret number. When you login, the system generates a math puzzle using
+			your number as "x". You solve the equation and enter the result. For example, if your secret number is 4,
+			you might get:</p>
+		<div class="puzzle">
+			<b>x × 3 = ?</b><br>
+			You solve: 4 × 3 = 12<br>
+			You enter: 12
+		</div>
+		<p>Or you might get:</p>
+		<div class="puzzle">
+			<b>(x × 2) + 5 = ?</b><br>
+			You solve: (4 × 2) + 5 = 8 + 5 = 13<br>
+			You enter: 13
+		</div>
+		<p>This way, you never type your secret number directly. You solve for the result instead! The puzzle changes
+			each time you login.</p>
+	</div>
+
+	<div class="links">
+		<a href="/signup">Sign up</a>
+		<a href="/login">Login</a>
+	</div>
+</div>
 </body>
 </html> 
