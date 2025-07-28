@@ -1,67 +1,67 @@
 const canvas = document.getElementById('canvas');
-  const ctx = canvas.getContext('2d');
-  const overlay = document.getElementById('overlay');
+const ctx = canvas.getContext('2d');
+const overlay = document.getElementById('overlay');
 
-  const AUTH_KEYWORDS = [
-    'auth', 'authentication', 'authorize', 'authly', 'login', 'logout', 
-    'password', 'passphrase', 'key', 'token', '2FA', 'MFA', 
-    'credential', 'signon', 'signin', 'signup', 'identity', 
-    'verify', 'validation', 'session', 'user', 'username', 
-    'security', 'unlock', 'lock', 'biometric', 'fingerprint', 
+const AUTH_KEYWORDS = [
+    'auth', 'authentication', 'authorize', 'authly', 'login', 'logout',
+    'password', 'passphrase', 'key', 'token', '2FA', 'MFA',
+    'credential', 'signon', 'signin', 'signup', 'identity',
+    'verify', 'validation', 'session', 'user', 'username',
+    'security', 'unlock', 'lock', 'biometric', 'fingerprint',
     'faceid', 'captcha', 'challenge', 'trust', 'handshake'
-  ];
+];
 
 
-  const FIRE_COLORS = ['#FF4500', '#FF6347', '#FF7F50', '#FF8C00', '#FFA500', '#FFD700'];
+const FIRE_COLORS = ['#FF4500', '#FF6347', '#FF7F50', '#FF8C00', '#FFA500', '#FFD700'];
 
-  let particles = [], animationPhase = 'particles', isComplete = false;
-  let startTime = null, duration = 3500;
+let particles = [], animationPhase = 'particles', isComplete = false;
+let startTime = null, duration = 3500;
 
-  function resizeCanvas() {
+function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-  }
+}
 
-  function easeInOutCubic(t) {
+function easeInOutCubic(t) {
     return t < 0.5
-      ? 4 * t * t * t
-      : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
-  }
+        ? 4 * t * t * t
+        : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+}
 
-  function initParticles() {
+function initParticles() {
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
     const maxRadius = Math.min(canvas.width, canvas.height) * 0.4;
 
     AUTH_KEYWORDS.forEach((text, index) => {
-      const count = text.length < 4 ? 3 : 2;
-      for (let i = 0; i < count; i++) {
-        const angle = (index * 360 / AUTH_KEYWORDS.length) + (i * 120 / count);
-        const radius = Math.random() * maxRadius + 100;
-        particles.push({
-          x: centerX + Math.cos(angle * Math.PI / 180) * radius,
-          y: centerY + Math.sin(angle * Math.PI / 180) * radius,
-          targetX: centerX,
-          targetY: centerY,
-          text,
-          size: Math.random() * 20 + 12,
-          opacity: 0.8 + Math.random() * 0.2,
-          angle,
-          radius,
-          speed: 0.02 + Math.random() * 0.01,
-          color: FIRE_COLORS[Math.floor(Math.random() * FIRE_COLORS.length)]
-        });
-      }
+        const count = text.length < 4 ? 3 : 2;
+        for (let i = 0; i < count; i++) {
+            const angle = (index * 360 / AUTH_KEYWORDS.length) + (i * 120 / count);
+            const radius = Math.random() * maxRadius + 100;
+            particles.push({
+                x: centerX + Math.cos(angle * Math.PI / 180) * radius,
+                y: centerY + Math.sin(angle * Math.PI / 180) * radius,
+                targetX: centerX,
+                targetY: centerY,
+                text,
+                size: Math.random() * 20 + 12,
+                opacity: 0.8 + Math.random() * 0.2,
+                angle,
+                radius,
+                speed: 0.02 + Math.random() * 0.01,
+                color: FIRE_COLORS[Math.floor(Math.random() * FIRE_COLORS.length)]
+            });
+        }
     });
-  }
+}
 
-  function animate(timestamp) {
+function animate(timestamp) {
     if (!startTime) startTime = timestamp;
     const elapsed = timestamp - startTime;
     const progress = Math.min(elapsed / duration, 1);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    const grad = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 50, canvas.width/2, canvas.height/2, canvas.width);
+    const grad = ctx.createRadialGradient(canvas.width / 2, canvas.height / 2, 50, canvas.width / 2, canvas.height / 2, canvas.width);
     grad.addColorStop(0, '#000000');
     grad.addColorStop(0.5, '#000000');
     grad.addColorStop(1, '#000000');
@@ -73,79 +73,79 @@ const canvas = document.getElementById('canvas');
     else animationPhase = 'complete';
 
     overlay.innerText = {
-      particles: 'Loading...',
-      text: 'Authenticating...',
-      complete: 'Ready!'
+        particles: 'Loading...',
+        text: 'Authenticating...',
+        complete: 'Ready!'
     }[animationPhase];
 
     if (progress < 0.8) {
-      particles.forEach(p => {
-        if (progress < 0.4) {
-          p.angle += p.speed * 2;
-          p.radius = Math.max(p.radius - 1, 50);
-          const cx = canvas.width / 2, cy = canvas.height / 2;
-          p.x = cx + Math.cos(p.angle * Math.PI / 180) * p.radius;
-          p.y = cy + Math.sin(p.angle * Math.PI / 180) * p.radius;
-        } else {
-          const factor = (progress - 0.4) / 0.4;
-          p.x += (p.targetX - p.x) * factor * 0.1;
-          p.y += (p.targetY - p.y) * factor * 0.1;
-          p.size *= 0.98;
-          p.opacity = Math.max(p.opacity - 0.04, 0);
-        }
+        particles.forEach(p => {
+            if (progress < 0.4) {
+                p.angle += p.speed * 2;
+                p.radius = Math.max(p.radius - 1, 50);
+                const cx = canvas.width / 2, cy = canvas.height / 2;
+                p.x = cx + Math.cos(p.angle * Math.PI / 180) * p.radius;
+                p.y = cy + Math.sin(p.angle * Math.PI / 180) * p.radius;
+            } else {
+                const factor = (progress - 0.4) / 0.4;
+                p.x += (p.targetX - p.x) * factor * 0.1;
+                p.y += (p.targetY - p.y) * factor * 0.1;
+                p.size *= 0.98;
+                p.opacity = Math.max(p.opacity - 0.04, 0);
+            }
 
-        if (p.opacity > 0.01) {
-          ctx.save();
-          ctx.globalAlpha = p.opacity;
-          ctx.fillStyle = p.color;
-          ctx.font = `${p.size}px Courier New`;
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
-          ctx.shadowColor = p.color;
-          ctx.shadowBlur = 10;
-          ctx.fillText(p.text, Math.floor(p.x), Math.floor(p.y));
-          ctx.restore();
-        }
-      });
+            if (p.opacity > 0.01) {
+                ctx.save();
+                ctx.globalAlpha = p.opacity;
+                ctx.fillStyle = p.color;
+                ctx.font = `${p.size}px Courier New`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.shadowColor = p.color;
+                ctx.shadowBlur = 10;
+                ctx.fillText(p.text, Math.floor(p.x), Math.floor(p.y));
+                ctx.restore();
+            }
+        });
     }
 
     if (progress >= 0.7) {
-      const textProgress = (progress - 0.7) / 0.3;
-      const eased = easeInOutCubic(textProgress);
-      const cx = canvas.width / 2;
-      const cy = canvas.height / 2;
-      const ty = canvas.height * 0.4;
-      const currentY = cy + (ty - cy) * eased;
-      const size = 60 + (eased * 80);
-      const opacity = Math.min(textProgress * 2, 1);
+        const textProgress = (progress - 0.7) / 0.3;
+        const eased = easeInOutCubic(textProgress);
+        const cx = canvas.width / 2;
+        const cy = canvas.height / 2;
+        const ty = canvas.height * 0.4;
+        const currentY = cy + (ty - cy) * eased;
+        const size = 60 + (eased * 80);
+        const opacity = Math.min(textProgress * 2, 1);
 
-      ctx.save();
-      ctx.globalAlpha = opacity;
-      const titleGradient = ctx.createLinearGradient(cx - 200, cy, cx + 200, cy);
-      titleGradient.addColorStop(0, '#FF8C00');
-      titleGradient.addColorStop(0.5, '#FF4500');
-      titleGradient.addColorStop(1, '#FFD700');
-      ctx.fillStyle = titleGradient;
-      ctx.font = `bold ${Math.floor(size)}px Oswald, sans-serif`;
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.shadowColor = '#FF6347';
-      ctx.shadowBlur = 20;
-      ctx.fillText('Authly', Math.floor(cx), Math.floor(currentY));
-      ctx.restore();
+        ctx.save();
+        ctx.globalAlpha = opacity;
+        const titleGradient = ctx.createLinearGradient(cx - 200, cy, cx + 200, cy);
+        titleGradient.addColorStop(0, '#FF8C00');
+        titleGradient.addColorStop(0.5, '#FF4500');
+        titleGradient.addColorStop(1, '#FFD700');
+        ctx.fillStyle = titleGradient;
+        ctx.font = `bold ${Math.floor(size)}px Oswald, sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.shadowColor = '#FF6347';
+        ctx.shadowBlur = 20;
+        ctx.fillText('Authly', Math.floor(cx), Math.floor(currentY));
+        ctx.restore();
     }
 
     if (progress < 1) {
-      requestAnimationFrame(animate);
+        requestAnimationFrame(animate);
     } else {
-      isComplete = true;
-      setTimeout(() => {
-        window.location.href = "/home.html";
-      }, 100);
+        isComplete = true;
+        setTimeout(() => {
+            window.location.href = "/home.html";
+        }, 100);
     }
 }
 
-  window.addEventListener('resize', resizeCanvas);
-  resizeCanvas();
-  initParticles();
-  requestAnimationFrame(animate);
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+initParticles();
+requestAnimationFrame(animate);
