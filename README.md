@@ -67,7 +67,7 @@ Simple static website with:
   <summary>View Contributors</summary>
   <ul>
     <li><a href="https://github.com/jimmydin7">jimmydin7</a> (main page + tutorials JSON)</li>
-    <li><a href="https://github.com/Spacexplorer11">Spacexplorer11</a> (README + Submission Checklist + old svelte tutorial)</li>
+    <li><a href="https://github.com/Spacexplorer11">Spacexplorer11</a> (README + Submission Checklist + How it works section  + old svelte tutoria)</li>
     <li><a href="https://github.com/twonfi">twonfi</a> (small typo)</li>
     <li><a href="https://github.com/yehorscode">yehorscode</a> (logo variations)</li>
   </ul>
