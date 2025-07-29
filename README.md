@@ -38,14 +38,9 @@ If your submission is approved, you'll receive a yubikey to enhance your securit
 
 </details>
 
-## 🚀 How to Submit
+## 🚀 How it works
 
-As of now, the submission process is not finalised, since this YSWS is currently a work in progress, you
-can [RSVP](https://airtable.com/appLMKxJKjiqcNlSg/pagtuibimlUPCjORV/form) so you are notified when the YSWS is live.
-
-> [!WARNING]
-> This means no time is being counted, so any time you spend on this project will not be counted towards your YSWS
-> submission.
+![How-it-works](static/imgs/how-it-works.png)
 
 ## 🎁 Reward
 
