@@ -11,134 +11,83 @@ const AUTH_KEYWORDS = [
     'faceid', 'captcha', 'challenge', 'trust', 'handshake'
 ];
 
-
-const FIRE_COLORS = ['#FF4500', '#FF6347', '#FF7F50', '#FF8C00', '#FFA500', '#FFD700'];
-
-let particles = [], animationPhase = 'particles', isComplete = false;
-let startTime = null, duration = 3500;
+let floatingWords = [];
+let startTime = null;
+let duration = 2000;
 
 function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 }
 
-function easeInOutCubic(t) {
-    return t < 0.5
-        ? 4 * t * t * t
-        : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+function createFloatingWords() {
+    floatingWords = AUTH_KEYWORDS.map(word => ({
+        text: word,
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 20 + 15,
+        opacity: Math.random() * 0.8 + 0.2,
+        speed: Math.random() * 0.5 + 0.2
+    }));
 }
 
-function initParticles() {
-    const centerX = canvas.width / 2;
-    const centerY = canvas.height / 2;
-    const maxRadius = Math.min(canvas.width, canvas.height) * 0.4;
-
-    AUTH_KEYWORDS.forEach((text, index) => {
-        const count = text.length < 4 ? 3 : 2;
-        for (let i = 0; i < count; i++) {
-            const angle = (index * 360 / AUTH_KEYWORDS.length) + (i * 120 / count);
-            const radius = Math.random() * maxRadius + 100;
-            particles.push({
-                x: centerX + Math.cos(angle * Math.PI / 180) * radius,
-                y: centerY + Math.sin(angle * Math.PI / 180) * radius,
-                targetX: centerX,
-                targetY: centerY,
-                text,
-                size: Math.random() * 20 + 12,
-                opacity: 0.8 + Math.random() * 0.2,
-                angle,
-                radius,
-                speed: 0.02 + Math.random() * 0.01,
-                color: FIRE_COLORS[Math.floor(Math.random() * FIRE_COLORS.length)]
-            });
-        }
-    });
+function easeOutCubic(t) {
+    return 1 - Math.pow(1 - t, 3);
 }
 
 function animate(timestamp) {
     if (!startTime) startTime = timestamp;
     const elapsed = timestamp - startTime;
     const progress = Math.min(elapsed / duration, 1);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    const grad = ctx.createRadialGradient(canvas.width / 2, canvas.height / 2, 50, canvas.width / 2, canvas.height / 2, canvas.width);
-    grad.addColorStop(0, '#000000');
-    grad.addColorStop(0.5, '#000000');
-    grad.addColorStop(1, '#000000');
-    ctx.fillStyle = grad;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#000";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    if (progress < 0.7) animationPhase = 'particles';
-    else if (progress < 1) animationPhase = 'text';
-    else animationPhase = 'complete';
 
-    overlay.innerText = {
-        particles: 'Loading...',
-        text: 'Authenticating...',
-        complete: 'Ready!'
-    }[animationPhase];
+    floatingWords.forEach(word => {
+        ctx.save();
+        ctx.globalAlpha = word.opacity * (1 - progress);
+        ctx.fillStyle = "#FF6347";
+        ctx.font = `${word.size}px Courier New`;
+        ctx.textAlign = "center";
+        ctx.fillText(word.text, word.x, word.y);
 
-    if (progress < 0.8) {
-        particles.forEach(p => {
-            if (progress < 0.4) {
-                p.angle += p.speed * 2;
-                p.radius = Math.max(p.radius - 1, 50);
-                const cx = canvas.width / 2, cy = canvas.height / 2;
-                p.x = cx + Math.cos(p.angle * Math.PI / 180) * p.radius;
-                p.y = cy + Math.sin(p.angle * Math.PI / 180) * p.radius;
-            } else {
-                const factor = (progress - 0.4) / 0.4;
-                p.x += (p.targetX - p.x) * factor * 0.1;
-                p.y += (p.targetY - p.y) * factor * 0.1;
-                p.size *= 0.98;
-                p.opacity = Math.max(p.opacity - 0.04, 0);
-            }
+        
+        word.y -= word.speed;
+        ctx.restore();
+    });
 
-            if (p.opacity > 0.01) {
-                ctx.save();
-                ctx.globalAlpha = p.opacity;
-                ctx.fillStyle = p.color;
-                ctx.font = `${p.size}px Courier New`;
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.shadowColor = p.color;
-                ctx.shadowBlur = 10;
-                ctx.fillText(p.text, Math.floor(p.x), Math.floor(p.y));
-                ctx.restore();
-            }
-        });
-    }
-
-    if (progress >= 0.7) {
-        const textProgress = (progress - 0.7) / 0.3;
-        const eased = easeInOutCubic(textProgress);
+    
+    if (progress > 0.6) {
+        const fade = easeOutCubic((progress - 0.6) / 0.4);
         const cx = canvas.width / 2;
         const cy = canvas.height / 2;
-        const ty = canvas.height * 0.4;
-        const currentY = cy + (ty - cy) * eased;
-        const size = 60 + (eased * 80);
-        const opacity = Math.min(textProgress * 2, 1);
 
         ctx.save();
-        ctx.globalAlpha = opacity;
-        const titleGradient = ctx.createLinearGradient(cx - 200, cy, cx + 200, cy);
-        titleGradient.addColorStop(0, '#FF8C00');
-        titleGradient.addColorStop(0.5, '#FF4500');
-        titleGradient.addColorStop(1, '#FFD700');
-        ctx.fillStyle = titleGradient;
-        ctx.font = `bold ${Math.floor(size)}px Oswald, sans-serif`;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.shadowColor = '#FF6347';
-        ctx.shadowBlur = 20;
-        ctx.fillText('Authly', Math.floor(cx), Math.floor(currentY));
+        ctx.globalAlpha = fade;
+
+        
+        const gradient = ctx.createLinearGradient(cx - 150, cy, cx + 150, cy);
+        gradient.addColorStop(0, "#FF4500"); 
+        gradient.addColorStop(1, "#FF6347"); 
+
+        ctx.fillStyle = gradient;
+        ctx.font = `bold ${Math.floor(80 + fade * 20)}px Oswald, sans-serif`;
+        ctx.textAlign = "center";
+        ctx.shadowColor = "#FF4500";
+        ctx.shadowBlur = 25;
+        ctx.fillText("Authly", cx, cy);
         ctx.restore();
     }
+
+
+    overlay.innerText = progress < 1 ? "Authenticating..." : "Ready!";
+
 
     if (progress < 1) {
         requestAnimationFrame(animate);
     } else {
-        isComplete = true;
         setTimeout(() => {
             window.location.href = "/home.html";
         }, 100);
@@ -147,5 +96,5 @@ function animate(timestamp) {
 
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
-initParticles();
+createFloatingWords();
 requestAnimationFrame(animate);
