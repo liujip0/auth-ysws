@@ -28,6 +28,7 @@
 			<a class="text-white hover:text-hack-yellow transition-colors" href="#challenge">The Challenge</a>
 			<a class="text-white hover:text-hack-yellow transition-colors" href="#examples">Examples</a>
 			<a class="text-white hover:text-hack-yellow transition-colors" href="#rewards">Rewards</a>
+			<a class="text-white hover:text-blue-400 transition-colors" href="#idea-generator">Idea Generator</a>
 			<a class="text-white hover:text-hack-yellow transition-colors" href="#community">Community</a>
 		</div>
 	</div>
@@ -160,23 +161,27 @@
 	</div>
 </section>
 
-<section class="py-20 bg-gray-800" id="examples">
-	<div class="max-w-7xl mx-auto px-6 text-center">
-		<h2 class="text-4xl md:text-5xl font-black text-white mb-4">
-			<span class="text-gradient-yellow">Example Ideas</span>
+<section class="py-20 bg-gray-800 text-center" id="idea-generator">
+	<div class="max-w-4xl mx-auto px-6">
+		<h2 class="text-4xl md:text-5xl font-black text-white mb-6">
+			<span class="text-gradient-yellow">Idea Generator</span>
 		</h2>
-		<p class="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
-			Need inspo? Try one of these or invent your own!
+		<p class="text-xl text-gray-300 mb-8">
+			Need inspiration? Get a random authentication idea to build!
 		</p>
-		<div class="grid md:grid-cols-2 gap-8 text-left">
-			<ul class="space-y-4 text-rg text-gray-200">
-				<li>• Log in by solving a riddle</li>
-				<li>• Authenticate with dance moves and pose detection</li>
-				<li>• Log in using your Minecraft server stats</li>
-				<li>• Build in a vulnerability and show how to hack it to log in</li>
-				<li>• Log in by clicking the right cat gif</li>
-				<li>• auth via AI that decides if you're you based on your writing tone</li>
-			</ul>
+		
+		<button class="bg-hack-yellow hover:bg-yellow-300 text-hack-red px-8 py-4 rounded-full font-bold text-lg transition-all transform hover:scale-105 mb-6" id="generateBtn">
+			Give me an idea!
+		</button>
+		
+		<div id="ideaContainer" class="hidden">
+			<div class="bg-gray-700/50 border-2 border-hack-yellow rounded-xl p-6 text-left">
+				<p class="text-white text-lg leading-relaxed mb-4" id="ideaText"></p>
+				<p class="text-gray-400 text-sm" id="ideaId"></p>
+				<button class="bg-hack-yellow hover:bg-yellow-300 text-hack-red px-4 py-2 rounded-lg font-bold mt-4 transition-all" id="acceptIdeaBtn" style="display: none;">
+					I'll do this!
+				</button>
+			</div>
 		</div>
 	</div>
 </section>
@@ -198,7 +203,7 @@
 	</div>
 </section>
 
-<section class="py-20 bg-gray-800 items-center text-center" id="submission-checklist">
+<section class="py-20 bg-gray-900 items-center text-center" id="submission-checklist">
 	<div class="ml-10" id="submission-checkboxes">
 		<h2 class="text-4xl md:text-5xl font-black text-white mb-4">
 			<span class="text-gradient-yellow">Submit a Project</span>
@@ -235,6 +240,16 @@
 	</button>
 </section>
 
+
+<div class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 hidden" id="confirmPopup">
+	<div class="bg-gray-800 p-6 rounded-xl max-w-md mx-4">
+		<p class="text-white mb-6">Accepting this means it will be <strong>removed from the database</strong> and the idea will stay with you.</p>
+		<div class="flex gap-4">
+			<button class="bg-hack-yellow hover:bg-yellow-300 text-hack-red px-4 py-2 rounded-lg font-bold transition-all" id="confirmContinue">Continue</button>
+			<button class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg font-bold transition-all" id="confirmBack">Back</button>
+		</div>
+	</div>
+</div>
 
 <section class="py-20 bg-gradient-to-r from-hack-red to-hack-orange text-center">
 	<div class="max-w-4xl mx-auto px-6">
@@ -295,5 +310,6 @@
 
 <script src="static/js/scroll.js"></script>
 <script src="static/js/unlock_button.js"></script>
+<script src="static/js/idea-generator.js"></script>
 </body>
 </html>
