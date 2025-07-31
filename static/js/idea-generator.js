@@ -1,5 +1,5 @@
 
-const API_BASE = 'https://corsproxy.io/?https://authlyapi2.pythonanywhere.com';
+const API_BASE = 'https://authlyapi2.pythonanywhere.com';
 
 const generateBtn = document.getElementById('generateBtn');
 const ideaContainer = document.getElementById('ideaContainer');
