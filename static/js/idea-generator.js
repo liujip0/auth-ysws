@@ -1,4 +1,3 @@
-
 const API_BASE = 'https://authlyapi2.pythonanywhere.com';
 
 const generateBtn = document.getElementById('generateBtn');
@@ -12,6 +11,23 @@ const confirmBack = document.getElementById('confirmBack');
 
 let currentIdea = null;
 
+async function tryFetchWithFallback(endpoint, options = {}) {
+    const urls = [
+        `https://corsproxy.io/?${API_BASE}${endpoint}`,
+        `https://api.allorigins.win/raw?url=${API_BASE}${endpoint}`, 
+        `https://thingproxy.freeboard.io/fetch/${API_BASE}${endpoint}` 
+    ];
+
+    for (const url of urls) {
+        try {
+            const res = await fetch(url, options);
+            if (res.ok) return res;  
+        } catch (err) {
+            console.warn(`❌ Failed on ${url}`, err);
+        }
+    }
+    throw new Error("All proxy attempts failed");
+}
 
 async function fetchRandomIdea() {
     generateBtn.disabled = true;
@@ -22,55 +38,29 @@ async function fetchRandomIdea() {
     ideaId.textContent = '';
 
     try {
-        const res = await fetch(`${API_BASE}/random`, {
+
+        const res = await tryFetchWithFallback('/random', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-            },
-            mode: 'cors'
-        });
-        
-        if (!res.ok) {
-            if (res.status === 404) {
-                ideaText.textContent = 'No more ideas left!';
-            } else {
-                ideaText.textContent = `Failed to fetch idea (${res.status}). Try again.`;
             }
-            currentIdea = null;
-            generateBtn.disabled = false;
-            generateBtn.textContent = 'Give me an idea!';
-            return;
-        }
-        
+        });
+
         const idea = await res.json();
         currentIdea = idea;
         ideaText.textContent = idea.text || idea.idea || 'Idea text missing';
         ideaId.textContent = `Idea ID: ${idea.id}`;
         acceptIdeaBtn.style.display = 'inline-block';
     } catch (e) {
-        console.error('Error fetching idea:', e);
-        if (e.name === 'TypeError' && e.message.includes('Failed to fetch')) {
-            ideaText.textContent = 'CORS Error: Please serve this file from a web server or use a CORS proxy.';
-        } else {
-            ideaText.textContent = 'Error fetching idea. Please try again.';
-        }
+        console.error('❌ Error fetching idea:', e);
+        ideaText.textContent = 'Error fetching idea. Please try again.';
         currentIdea = null;
     }
 
     generateBtn.disabled = false;
     generateBtn.textContent = 'Give me another idea!';
 }
-
-
-function showConfirmPopup() {
-    confirmPopup.classList.remove('hidden');
-}
-
-function hideConfirmPopup() {
-    confirmPopup.classList.add('hidden');
-}
-
 
 async function deleteCurrentIdea() {
     if (!currentIdea) return;
@@ -79,32 +69,35 @@ async function deleteCurrentIdea() {
     ideaText.textContent = 'Removing idea...';
 
     try {
-        const res = await fetch(`${API_BASE}/delete/${currentIdea.id}`, {
+        const res = await tryFetchWithFallback(`/delete/${currentIdea.id}`, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-            },
-            mode: 'cors'
+            }
         });
-        if (!res.ok) {
-            throw new Error(`Failed to delete idea (${res.status})`);
-        }
+
+        if (!res.ok) throw new Error(`Failed to delete idea (${res.status})`);
+
         await res.json();
         alert('Idea accepted and removed from database!');
         hideConfirmPopup();
         acceptIdeaBtn.style.display = 'none';
         currentIdea = null;
     } catch (error) {
-        console.error('Error deleting idea:', error);
-        if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
-            alert('CORS Error: Please serve this file from a web server.');
-        } else {
-            alert('Could not remove idea. Please try again later.');
-        }
+        console.error('❌ Error deleting idea:', error);
+        alert('Could not remove idea. Please try again later.');
     } finally {
         acceptIdeaBtn.disabled = false;
     }
+}
+
+function showConfirmPopup() {
+    confirmPopup.classList.remove('hidden');
+}
+
+function hideConfirmPopup() {
+    confirmPopup.classList.add('hidden');
 }
 
 
@@ -127,4 +120,4 @@ confirmPopup.addEventListener('click', (e) => {
     if (e.target === confirmPopup) {
         hideConfirmPopup();
     }
-}); 
+});
