@@ -60,6 +60,8 @@ Here are some ideas to get you started:
 Remember: The more original and creative your project is, the better! These are just starting points - feel free to come
 up with your own unique ideas!
 
+There is also an **unique** [idea generator](https://authly.hackclub.com/home.html#idea-generator) on the website!
+
 ## 🤝 Need Help?
 
 Join the [#authly](https://hackclub.slack.com/archives/authly) channel on the Hack Club Slack to:
