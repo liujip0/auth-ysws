@@ -87,6 +87,8 @@ It's a habit tracker with a weird auth system. When a user signs up he enters a 
 to solve an equation with his secret number as x, so this way only he knows the answer.
 The app will be live soon!
 
+Here is the live demo: [Demo]( https://jimdiet.pythonanywhere.com/)
+
 ## Contributors
 
 <details>
