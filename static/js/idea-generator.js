@@ -8,6 +8,7 @@ const acceptIdeaBtn = document.getElementById('acceptIdeaBtn');
 const confirmPopup = document.getElementById('confirmPopup');
 const confirmContinue = document.getElementById('confirmContinue');
 const confirmBack = document.getElementById('confirmBack');
+const ideaDisclaimer = document.getElementById('ideaDisclaimer');
 const localIdeas = {
   '1': { text: 'Beat a short, 10-second platformer level to grab a virtual key.', id: '1' },
   '2': { text: 'Hit notes in time with a song, like Guitar Hero, to unlock access.', id: '2' },
@@ -30,6 +31,8 @@ const localIdeas = {
   '19': { text: 'Allowed only if your streak is active.', id: '19' },
   '20': { text: 'Use the current price of a cryptocurrency.', id: '20' }
 };
+
+ideaDisclaimer.hidden = true;
 
 let currentIdea = null;
 
@@ -79,6 +82,7 @@ async function fetchRandomIdea() {
     const idea = ideaValues[Math.floor(Math.random() * ideaValues.length)];
     console.error('❌ Error fetching idea:', e);
     ideaText.textContent = idea.text;
+    ideaDisclaimer.hidden = false;
     currentIdea = idea;
   }
 
