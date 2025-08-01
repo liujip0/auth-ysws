@@ -60,8 +60,6 @@ Here are some ideas to get you started:
 Remember: The more original and creative your project is, the better! These are just starting points - feel free to come
 up with your own unique ideas!
 
-There is also an **unique** [idea generator](https://authly.hackclub.com/home.html#idea-generator) on the website!
-
 ## 🤝 Need Help?
 
 Join the [#authly](https://hackclub.slack.com/archives/authly) channel on the Hack Club Slack to:
@@ -88,6 +86,8 @@ system [here](https://github.com/jimmydin7/auth-ysws/tree/main/demo)
 It's a habit tracker with a weird auth system. When a user signs up he enters a secret number and then to login he has
 to solve an equation with his secret number as x, so this way only he knows the answer.
 The app will be live soon!
+
+Here is the live demo: [Demo]( https://jimdiet.pythonanywhere.com/)
 
 ## Contributors
 
