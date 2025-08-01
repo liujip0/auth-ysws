@@ -8,6 +8,28 @@ const acceptIdeaBtn = document.getElementById('acceptIdeaBtn');
 const confirmPopup = document.getElementById('confirmPopup');
 const confirmContinue = document.getElementById('confirmContinue');
 const confirmBack = document.getElementById('confirmBack');
+const localIdeas = {
+  '1': { text: 'Beat a short, 10-second platformer level to grab a virtual key.', id: '1' },
+  '2': { text: 'Hit notes in time with a song, like Guitar Hero, to unlock access.', id: '2' },
+  '3': { text: 'Type a paragraph with a minimum WPM and accuracy.', id: '3' },
+  '4': { text: 'Find a tiny character or object in a complex image.', id: '4' },
+  '5': { text: 'Identify a random location on Google Maps Street View.', id: '5' },
+  '6': { text: 'Solve a "mate in one" chess puzzle.', id: '6' },
+  '7': { text: 'Get a score in a simple game like Flappy Bird.', id: '7' },
+  '8': { text: 'Repeat a sequence of colours and sounds.', id: '8' },
+  '9': { text: 'Get a ball into a basket by drawing lines.', id: '9' },
+  '10': { text: 'Navigate a dot through a maze before the timer runs out.', id: '10' },
+  '11': { text: 'Solve a five-letter word puzzle that changes daily.', id: '11' },
+  '12': { text: 'Click a button the instant it changes colour.', id: '12' },
+  '13': { text: 'Match musical notes with your voice.', id: '13' },
+  '14': { text: 'Find a combo by listening to tumbler clicks.', id: '14' },
+  '15': { text: "Find the 'key' item in a short text adventure.", id: '15' },
+  '16': { text: 'Mix a specific drink from virtual ingredients.', id: '16' },
+  '17': { text: "Only allowed if you've made a commit today.", id: '17' },
+  '18': { text: 'Use your most-played artist of the week.', id: '18' },
+  '19': { text: 'Allowed only if your streak is active.', id: '19' },
+  '20': { text: 'Use the current price of a cryptocurrency.', id: '20' }
+};
 
 let currentIdea = null;
 
@@ -53,9 +75,11 @@ async function fetchRandomIdea() {
     ideaId.textContent = `Idea ID: ${idea.id}`;
     acceptIdeaBtn.style.display = 'inline-block';
   } catch (e) {
+    const ideaValues = Object.values(localIdeas);
+    const idea = ideaValues[Math.floor(Math.random() * ideaValues.length)];
     console.error('❌ Error fetching idea:', e);
-    ideaText.textContent = 'Error fetching idea. Please try again.';
-    currentIdea = null;
+    ideaText.textContent = idea.text;
+    currentIdea = idea;
   }
 
   generateBtn.disabled = false;
