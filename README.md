@@ -69,6 +69,13 @@ Join the [#authly](https://hackclub.slack.com/archives/authly) channel on the Ha
 - Connect with other participants
 - Ask questions about the program
 
+## Blog!
+Check out the [blog](https://authly.hackclub.com/blog) for more information about the program, tutorials, and more!  
+It also will have important announcements and updates about the program.
+
+## Track our progress
+You, as a participant, can track **our** progress on reviewing **your** projects [here!](https://authly.hackclub.com/track/)
+
 ## Tech-Stack
 
 Simple static website with:
@@ -95,7 +102,7 @@ Here is the live demo: [Demo]( https://jimdiet.pythonanywhere.com/)
   <summary>View Contributors</summary>
   <ul>
     <li><a href="https://github.com/jimmydin7">jimmydin7</a> (main page + tutorials JSON + demo + intro animation)</li>
-    <li><a href="https://github.com/Spacexplorer11">Spacexplorer11</a> (README + Submission Checklist + How it works section  + old svelte tutoria)</li>
+    <li><a href="https://github.com/Spacexplorer11">Spacexplorer11</a> (A lot - check commits for more info)</li>
     <li><a href="https://github.com/twonfi">twonfi</a> (small typo)</li>
     <li><a href="https://github.com/yehorscode">yehorscode</a> (logo variations)</li>
   </ul>
@@ -104,5 +111,6 @@ Here is the live demo: [Demo]( https://jimdiet.pythonanywhere.com/)
 
 ---
 
-> Built with ❤️ by **Jim Dinias**
-> Mentored by POC, **Kate Caulfield**
+> Built with ❤️ by **Jim Dinias**  
+> Mentored by POC, **Kate Caulfield**  
+> Helped by **Akaalroop Singh** (Spacexplorer11)  
