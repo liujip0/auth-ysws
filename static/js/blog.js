@@ -43,7 +43,9 @@ announcementsData.forEach(item => {
       <div class="flex items-center space-x-4 mb-3">
         <img src="${author.pfp}" alt="${author.name} avatar" class="w-10 h-10 rounded-full" />
         <div>
-          <a href="${author.meta}"><p class="text-sm font-semibold">${author.name}</p></a>
+          <a href="${author.meta}" target="_blank" rel="noopener noreferrer" class="text-gray-400 underline">
+  ${author.name}
+</a>
           <p class="text-xs text-gray-400">${item.date} • ${author.role}</p>
         </div>
       </div>
