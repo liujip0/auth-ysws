@@ -56,7 +56,17 @@
 			<pre class="!bg-transparent"><code class="block text-base" id="code-content"></code></pre>
 		</div>
 	</div>
-	<div class="flex gap-6 justify-center mb-10">
+
+<!-- sticked next to the button as graham told me-->
+<style>
+	main {
+		padding-bottom: 5rem;
+	}
+</style>
+
+
+<div class="fixed bottom-0 left-0 w-full bg-gray-900 border-t border-gray-700 z-50">
+	<div class="max-w-2xl mx-auto px-4 py-4 flex justify-center gap-6">
 		<button class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-lg shadow" id="back-btn">
 			Back
 		</button>
@@ -64,6 +74,8 @@
 		        id="next-btn">Next
 		</button>
 	</div>
+</div>
+
 </main>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
