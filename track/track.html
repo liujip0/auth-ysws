@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"/>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+	<title>Authly Review Tracking</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script src="/static/js/tailwindconfig.js"></script>
+	<link href="/static/favicons/favicon-96x96.png" rel="icon" sizes="96x96" type="image/png"/>
+	<link href="/static/favicons/favicon.svg" rel="icon" type="image/svg+xml"/>
+	<link href="/static/favicons/favicon.ico" rel="shortcut icon"/>
+	<link href="/static/favicons/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+	<meta content="Authly" name="apple-mobile-web-app-title"/>
+	<link href="/static/favicons/site.webmanifest" rel="manifest"/>
+</head>
+<body class="bg-gray-900 text-center">
+<nav class="relative z-10 p-6">
+	<div class="max-w-7xl mx-auto flex items-center justify-between">
+		<div class="flex items-center space-x-3">
+			<div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+				<img src="/static/logo/logo_key_size3.png" aria-label="authly logo" alt="authly logo" class="w-6 h-6 rounded-lg" title="authly logo">
+			</div>
+			<span class="text-white font-bold text-xl">authly</span>
+		</div>
+		<div class="hidden md:flex items-center space-x-6">
+			<a class="text-white hover:text-hack-yellow transition-colors" href="/auth-ysws/home.html">Home</a>
+			<a class="text-white hover:text-hack-yellow transition-colors" href="/auth-ysws/home.html#submission-checklist" target="_blank">Submit</a>
+		</div>
+	</div>
+</nav>
+<main class="w-full">
+	<h2 class="text-3xl font-bold text-gray-300 mb-6">
+		Submissions Count: <span id="submissions-count-value" class="text-hack-yellow">0</span>
+	</h2>
+	<h2 class="text-3xl font-bold text-gray-300 mb-6">
+		Reviews Count: <span id="reviews-count-value" class="text-hack-yellow">0</span>
+	</h2>
+	<div class="w-[90vw] bg-gray-700 rounded-full h-6 mb-6 mx-auto">
+		<div id="progress-bar-fill" class="bg-hack-yellow h-full rounded-full transition-all duration-300 w-0"></div>
+	</div>
+	<p class="text-gray-400 mb-10">Progress: <span id="progress-percentage">0%</span></p>
+	<h2 class="text-3xl font-bold text-gray-300 mb-6">
+		Reviews Percentage: <span id="reviewed-percentage" class="text-hack-yellow">0% or 0/1</span>
+	</h2>
+	<h2 class="text-3xl font-bold text-gray-300 mb-6">
+		Approved Submissions Count: <span id="approved-count-value" class="text-hack-yellow">0</span>
+	</h2>
+	<h2 class="text-3xl font-bold text-gray-300 mb-6">
+		Rejected Submissions Count: <span id="rejected-count-value" class="text-hack-yellow">0</span>
+	</h2>
+</main>
+</body>
+</html>
