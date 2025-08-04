@@ -4,7 +4,7 @@
 # Authly
 
 Authly is a [You Ship We Ship](https://ysws.hackclub.com) program that rewards teenagers for creating unique and
-interesting authentication flows with a yubikey from yubico
+interesting authentication systems with yubikeys, programmable NFC tags, and antivirus software giftcards.
 
 ## 🎯 The Challenge
 
@@ -44,7 +44,7 @@ If your submission is approved, you'll receive a yubikey to enhance your securit
 
 ## 🎁 Reward
 
-If your submission is approved, you'll receive a yubikey from [yubico](https://www.yubico.com) to enhance your security!
+If your submission is approved, you'll be eligible to recieve a yubikey, programmable NFC tags, and antivirus software giftcards (based on the hours you spend)
 
 ## 💡 Project Ideas
 
