@@ -2,12 +2,14 @@ const authors = {
   akaal: {
     name: "Akaal",
     pfp: "pfps/akaal.png",
-    role: "Volunteer"
+    role: "Volunteer",
+    meta: "https://github.com/Spacexplorer11"
   },
   jim: {
     name: "Jim",
     pfp: "pfps/jim.png",
-    role: "Admin"
+    role: "Admin",
+    meta: "https://github.com/jimmydin7"
   }
 };
 const announcementsData = [
@@ -41,7 +43,7 @@ announcementsData.forEach(item => {
       <div class="flex items-center space-x-4 mb-3">
         <img src="${author.pfp}" alt="${author.name} avatar" class="w-10 h-10 rounded-full" />
         <div>
-          <p class="text-sm font-semibold">${author.name}</p>
+          <a href="${author.meta}"><p class="text-sm font-semibold">${author.name}</p></a>
           <p class="text-xs text-gray-400">${item.date} • ${author.role}</p>
         </div>
       </div>
