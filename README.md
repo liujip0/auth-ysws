@@ -69,6 +69,11 @@ Join the [#authly](https://hackclub.slack.com/archives/authly) channel on the Ha
 - Connect with other participants
 - Ask questions about the program
 
+## Blog!
+Check out the [blog](https://authly.hackclub.com/blog) for more information about the program, tutorials, and more!  
+It also will have important announcements and updates about the program.
+
+
 ## Tech-Stack
 
 Simple static website with:
