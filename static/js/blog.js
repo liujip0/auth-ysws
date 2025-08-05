@@ -14,6 +14,13 @@ const authors = {
 };
 const announcementsData = [
   {
+    title: "Authly is live!",
+    content: "Hey folks, I am super glad to announce that authly is finally live! It will last until the end of August. You can get rewards from yubikeys, to nfc tags and antivirus software giftcards. You can even get 2 yubikeys for 20 hours of work! For more go into our slack #authly!",
+    date: "Aug 5, 2025",
+    importance: "Super Important",
+    authorId: "jim"
+  },
+  {
     title: "We just got access to HCB!",
     content: "The YSWS-AUTHLY Hack Club Bank (HCB) organization just got approved, Leo is currently helping me set up restrictions! We are getting way close to launch than you think!",
     date: "Aug 4, 2025",
