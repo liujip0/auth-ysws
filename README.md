@@ -38,6 +38,11 @@ If your submission is approved, you'll receive a yubikey to enhance your securit
 
 </details>
 
+## 📝 How to Submit
+**Step 1** -> Use our [submission form](https://airtable.com/appLMKxJKjiqcNlSg/pagXLkgh6iPYS2hpD/form)
+
+**Step 2** -> Make a PR so your project shows up in the submission gallery
+
 ## 🚀 How it works
 
 ![How-it-works](static/imgs/how-it-works.png)
