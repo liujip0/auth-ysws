@@ -41,7 +41,19 @@ If your submission is approved, you'll receive a yubikey to enhance your securit
 ## 📝 How to Submit
 **Step 1** -> Use our [submission form](https://airtable.com/appLMKxJKjiqcNlSg/pagXLkgh6iPYS2hpD/form)
 
-**Step 2** -> Make a PR so your project shows up in the submission gallery
+**Step 2** → Make a Pull Request (PR) so your project appears in the submission gallery  
+Here's how:
+
+1. **Fork this repository**
+2. **Create a new folder** inside the `submissions` directory. Name it after your project.
+3. **Inside your project folder**, create a file called `info.yml` with the following format (edit accordingly):
+   ```yaml
+   name: Your Project Name
+   description: A short description of your project
+   github: https://github.com/yourusername/yourproject
+   demo: https://your-demo-link.com
+4. **Inside your project folder**, add an image of your project with the name `image.png`
+5. **Make a Pull Request (PR)** to see your project on the gallery!
 
 ## 🚀 How it works
 
