@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Authly Submissions</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="styles.css" rel="stylesheet"/>
+  <script src="static/js/tailwindconfig.js"></script>
+  <link href="static/css/index.css" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-white">
+
+<nav class="relative z-10 p-6">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <div class="flex items-center space-x-3">
+      <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+        <img src="static/logo/logo_key_size3.png" alt="authly logo" class="w-6 h-6 rounded-lg">
+      </div>
+      <span class="text-white font-bold text-xl">authly</span>
+    </div>
+    <div class="hidden md:flex items-center space-x-6">
+      <a class="text-white hover:text-hack-yellow transition-colors" href="home.html#challenge">Challenge</a>
+      <a class="text-white hover:text-hack-yellow transition-colors" href="home.html#rewards">Rewards</a>
+      <a class="text-white hover:text-hack-yellow transition-colors" href="home.html#idea-generator">Idea Generator</a>
+      <a class="text-white hover:text-hack-yellow transition-colors" href="home.html#community">Community</a>
+      <a class="text-white hover:text-hack-yellow transition-colors" href="home.html#faq" target="_blank">FAQ</a>
+      <a class="text-white hover:text-hack-yellow transition-colors" href="home.html#submission-checklist">Submit</a>
+    </div>
+  </div>
+</nav>
+
+
+<section class="py-20 px-6 max-w-7xl mx-auto">
+  <h1 class="text-4xl md:text-5xl font-black text-white mb-12 text-center">Submission Gallery</h1>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="projects"></div>
+</section>
+
+
+<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+<script>
+  async function loadProject(folder) {
+    try {
+      const infoRes = await fetch(`${folder}/info.yml`);
+      if (!infoRes.ok) throw new Error("Missing info.yml");
+
+      const infoText = await infoRes.text();
+      const data = jsyaml.load(infoText);
+      data.image = `${folder}/image.png`;
+      return data;
+    } catch (err) {
+      console.error(`Failed to load ${folder}:`, err);
+      return null;
+    }
+  }
+
+  async function displayProjects() {
+    const folder = 'test_submission';
+    const container = document.getElementById('projects');
+
+    const project = await loadProject(folder);
+    if (!project) return;
+
+    const card = document.createElement('div');
+    card.className = 'bg-zinc-900 rounded-xl p-4 shadow-lg hover:scale-[1.02] transition-transform duration-300';
+
+    const description = document.createElement('p');
+    description.className = 'text-gray-300 text-sm mt-2 line-clamp-3';
+    description.textContent = project.description;
+
+    const expandBtn = document.createElement('button');
+    expandBtn.textContent = 'Show more';
+    expandBtn.className = 'text-hack-yellow text-sm mt-2 hover:underline';
+    expandBtn.onclick = () => {
+      description.classList.toggle('line-clamp-3');
+      expandBtn.textContent = description.classList.contains('line-clamp-3') ? 'Show more' : 'Show less';
+    };
+
+    card.innerHTML = `
+      <img src="${project.image}" alt="${project.name}" class="rounded-lg mb-4 w-full h-40 object-cover"/>
+      <h2 class="text-xl font-bold text-white mb-2">${project.name}</h2>
+    `;
+    card.appendChild(description);
+    card.appendChild(expandBtn);
+
+    const links = document.createElement('div');
+    links.className = 'mt-4 flex gap-4';
+    links.innerHTML = `
+      <a href="${project.github}" target="_blank" class="bg-white text-hack-red px-4 py-2 rounded-full font-bold text-sm hover:bg-gray-100 transition-all">GitHub</a>
+      <a href="${project.demo}" target="_blank" class="bg-hack-yellow text-hack-red px-4 py-2 rounded-full font-bold text-sm hover:bg-yellow-300 transition-all">Demo</a>
+    `;
+    card.appendChild(links);
+
+    container.appendChild(card);
+  }
+
+  displayProjects();
+</script>
+
+</body>
+</html>
