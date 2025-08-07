@@ -46,7 +46,7 @@ Here's how:
 
 1. **Fork this repository**
 2. **Create a new folder** inside the `submissions` directory. Name it after your project.
-3. **Inside your project folder**, create a file called `info.yml` with the following format (edit accordingly):
+3. **Inside your project folder**, create a file called `info.yml` with the following format (edit accordingly and please name it `.yml` **NOT** `.yaml`):
    ```yaml
    name: Your Project Name
    description: A short description of your project
