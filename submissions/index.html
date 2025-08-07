@@ -39,43 +39,22 @@
 
 <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
 <script>
-  async function getProjectFolders() {
+  async function getFolders() {
   const apiUrl = 'https://api.github.com/repos/jimmydin7/auth-ysws/contents/submissions';
-
   try {
     const res = await fetch(apiUrl);
-    if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
-
-    const items = await res.json();
-
-
-    const folders = items.filter(item => item.type === 'dir').map(item => item.name);
-
-    return folders;
-  } catch (error) {
-    console.error(error);
+    if (!res.ok) throw new Error('GitHub API error');
+    const data = await res.json();
+    return data.filter(item => item.type === 'dir').map(item => item.name);
+  } catch (e) {
+    console.error(e);
     return [];
-  }
-}
-
-async function loadProject(folder) {
-  try {
-    const infoRes = await fetch(`submissions/${folder}/info.yml`);
-    if (!infoRes.ok) throw new Error(`Missing info.yml for ${folder}`);
-
-    const infoText = await infoRes.text();
-    const data = jsyaml.load(infoText);
-    data.image = `submissions/${folder}/image.png`;
-    return data;
-  } catch (err) {
-    console.error(`Failed to load ${folder}:`, err);
-    return null;
   }
 }
 
 async function displayProjects() {
   const container = document.getElementById('projects');
-  const folders = await getProjectFolders();
+  const folders = await getFolders();
 
   for (const folder of folders) {
     const project = await loadProject(folder);
@@ -118,7 +97,6 @@ async function displayProjects() {
 }
 
 displayProjects();
-
 </script>
 
 </body>
