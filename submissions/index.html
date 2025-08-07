@@ -39,7 +39,22 @@
 
 <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
 <script>
-  async function getFolders() {
+ async function loadProject(folder) {
+  try {
+    const infoRes = await fetch(`${folder}/info.yml`);
+    if (!infoRes.ok) throw new Error("Missing info.yml");
+
+    const infoText = await infoRes.text();
+    const data = jsyaml.load(infoText);
+    data.image = `${folder}/image.png`;
+    return data;
+  } catch (err) {
+    console.error(`Failed to load ${folder}:`, err);
+    return null;
+  }
+}
+
+async function getFolders() {
   const apiUrl = 'https://api.github.com/repos/jimmydin7/auth-ysws/contents/submissions';
   try {
     const res = await fetch(apiUrl);
@@ -57,7 +72,7 @@ async function displayProjects() {
   const folders = await getFolders();
 
   for (const folder of folders) {
-    const project = await loadProject(folder);
+    const project = await loadProject(`submissions/${folder}`);
     if (!project) continue;
 
     const card = document.createElement('div');
@@ -85,9 +100,7 @@ async function displayProjects() {
     const links = document.createElement('div');
     links.className = 'mt-4 flex gap-4';
     links.innerHTML = `
-      <a href="${project.github}" target="_blank" class="bg-[#ff8c37] hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-        GitHub
-      </a>
+      <a href="${project.github}" target="_blank" class="bg-[#ff8c37] hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">GitHub</a>
       <a href="${project.demo}" target="_blank" class="bg-[#8492a6] hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Demo</a>
     `;
     card.appendChild(links);
@@ -97,6 +110,7 @@ async function displayProjects() {
 }
 
 displayProjects();
+
 </script>
 
 </body>
