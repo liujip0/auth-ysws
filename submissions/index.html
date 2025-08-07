@@ -72,7 +72,7 @@ async function displayProjects() {
   const folders = await getFolders();
 
   for (const folder of folders) {
-    const project = await loadProject(`submissions/${folder}`);
+    const project = await loadProject(`${folder}`);
     if (!project) continue;
 
     const card = document.createElement('div');
