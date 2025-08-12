@@ -6,8 +6,17 @@
   <title>Authly Submissions</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="styles.css" rel="stylesheet"/>
-  <script src="static/js/tailwindconfig.js"></script>
-  <link href="static/css/index.css" rel="stylesheet">
+  <script src="/static/js/tailwindconfig.js"></script>
+  <link href="/static/css/index.css" rel="stylesheet">
+  <style>
+    /* Local 2-line clamp since Tailwind line-clamp plugin isn't loaded via CDN */
+    .clamp-2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  </style>
 </head>
 <body class="bg-gray-900 text-white">
 
@@ -79,15 +88,16 @@ async function displayProjects() {
     card.className = 'bg-zinc-900 rounded-xl p-4 shadow-lg hover:scale-[1.02] transition-transform duration-300';
 
     const description = document.createElement('p');
-    description.className = 'text-gray-300 text-sm mt-2 line-clamp-3';
-    description.textContent = project.description;
+    description.className = 'text-gray-300 text-sm mt-2 clamp-2';
+    description.textContent = project.description || '';
 
     const expandBtn = document.createElement('button');
     expandBtn.textContent = 'Show more';
     expandBtn.className = 'text-hack-yellow text-sm mt-2 hover:underline';
+    expandBtn.style.display = 'none';
     expandBtn.onclick = () => {
-      description.classList.toggle('line-clamp-3');
-      expandBtn.textContent = description.classList.contains('line-clamp-3') ? 'Show more' : 'Show less';
+      description.classList.toggle('clamp-2');
+      expandBtn.textContent = description.classList.contains('clamp-2') ? 'Show more' : 'Show less';
     };
 
     card.innerHTML = `
@@ -96,6 +106,26 @@ async function displayProjects() {
     `;
     card.appendChild(description);
     card.appendChild(expandBtn);
+
+    requestAnimationFrame(() => {
+      try {
+        const computed = window.getComputedStyle(description);
+        let lineHeight = parseFloat(computed.lineHeight);
+        if (Number.isNaN(lineHeight)) {
+          const fontSize = parseFloat(computed.fontSize) || 14;
+          lineHeight = fontSize * 1.4;
+        }
+        const hadClamp = description.classList.contains('clamp-2');
+        if (hadClamp) description.classList.remove('clamp-2');
+        const fullHeight = description.scrollHeight;
+        const twoLineHeight = (lineHeight * 2) + 1;
+        if (hadClamp) description.classList.add('clamp-2');
+        if (fullHeight > twoLineHeight && description.textContent.trim().length > 0) {
+          expandBtn.style.display = 'inline';
+        }
+      } catch (_) {
+      }
+    });
 
     const links = document.createElement('div');
     links.className = 'mt-4 flex gap-4';
