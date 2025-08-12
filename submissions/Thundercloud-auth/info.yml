@@ -1,0 +1,4 @@
+name: Thundercloud-auth
+description: Only logs in if your cloud emoji collection matches the sequence of a thunderstorm.
+github: https://github.com/000xs/thundercloud-auth
+demo: https://thundercloud-auth.vercel.app/
